@@ -1,19 +1,43 @@
 //index.js
 //获取应用实例
 const app = getApp()
+// 导入request.js
 
+const request = require("../../utils/request")
+const $api = require('../../utils/api').API
 Page({
   data: {
     motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    list:[
+      {id:1},
+      {id:2}
+    ]
   },
   //事件处理函数
   bindViewTap: function() {
     wx.navigateTo({
       url: '../logs/logs'
     })
+  },
+
+  // 请求数据接口封装的另外一种写法
+  getIndexList(){
+    $api.getIndexList({"code":"code"}).then(res=>{
+        console.log(res)
+    }).catch(err=>{
+        console.log(err)
+    })
+  },
+  // 请求数据
+  getList(){
+      request('127.0.0.1',"get",{},{"token":app.globalData.token}).then(res=>{
+        console.log(res)
+      }).catch(err=>{
+        console.log(err)
+      })
   },
   onLoad: function () {
     if (app.globalData.userInfo) {

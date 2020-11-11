@@ -10,4 +10,11 @@
   <view class="usermotto">
     <text class="user-motto">{{motto}}</text>
   </view>
+
+  <view>
+      <block wx:for="{{list}}">
+          <view >{{item.id}}</view>
+      </block>
+  </view>
+
 </view>
